@@ -1,4 +1,4 @@
-module Data where
+module AST where
 
 type Var = String
 

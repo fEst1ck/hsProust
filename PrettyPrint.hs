@@ -1,6 +1,6 @@
 module PrettyPrint where
 
-import Data
+import AST
 
 instance Show Expr where
     show (Lam x e)         = "(λ " ++ x ++ " => " ++ show e ++ ")"
