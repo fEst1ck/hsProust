@@ -9,14 +9,15 @@ data Expr = Lam Var Expr
           | OrIntro0 Expr
           | OrIntro1 Expr
           | OrElim Expr Expr Expr
-          | ContraElim Expr
+          | BotElim Expr
           | App Expr Expr
           | Ann Expr Type
           | Hole Int
           | Var Var
 
 data Type = Arrow Type Type
-          | Product Type Type
+          | Product { product0 :: Type, product1 :: Type }
           | Sum Type Type
-          | Contra
+          | Bot
           | TypeVar Var
+    deriving Eq
