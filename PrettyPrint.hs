@@ -4,7 +4,7 @@ import AST
 
 instance Show Expr where
     show (Lam x e)         = "(λ " ++ x ++ " => " ++ show e ++ ")"
-    show (AndIntro e1 e2)  = "(∧-intro " ++ show e1 ++ show e2 ++ ")"
+    show (AndIntro e1 e2)  = "(∧-intro " ++ show e1 ++ " " ++ show e2 ++ ")"
     show (AndElim0 e)      = "(∧-elim0 " ++ show e ++ ")"
     show (AndElim1 e)      = "(∧-elim1 " ++ show e ++ ")"
     show (OrIntro0 e)      = "(∨-intro0 " ++ show e ++ ")"

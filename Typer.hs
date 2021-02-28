@@ -1,3 +1,4 @@
+module Typer where
 import AST
 import Prelude hiding (lookup)
 import Data.Map ( insert, lookup, Map )
@@ -39,3 +40,4 @@ typeSynth ctx (Ann x t) = do
 typeSynth ctx (AndIntro e1 e2) = Product <$> typeSynth ctx e1 <*> typeSynth ctx e2
 typeSynth ctx (AndElim0 e) = product0 <$> typeSynth ctx e
 typeSynth ctx (AndElim1 e) = product1 <$> typeSynth ctx e
+typeSynth _ _ = Nothing
