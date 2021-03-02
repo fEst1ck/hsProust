@@ -36,6 +36,7 @@ t = t → t
 # Demo
 *Check validity of proof terms:*
 ![Type check](demo/demo2.png)
+
 *Interactively proving:*
 ![prototype](demo/demo1.gif)
 
