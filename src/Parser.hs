@@ -47,17 +47,17 @@ typeVar = TypeVar <$> identifier
 
 lam = do {reservedOp "\\" <|> reservedOp "λ"; x <- identifier; reservedOp "=>"; e <- expr'''; return $ Lam x e}
 -- lam = reservedOp "\\" >> Lam <$> identifier <*> expr'''
-andIntro = (symbol "/\\-intro" <|> symbol "∧-intro") >> AndIntro <$> expr''' <*> expr'''
-andElim0 = (symbol "/\\-elim0" <|> symbol "∧-elim0") >> AndElim0 <$> expr'''
-andElim1 = (symbol "/\\-elim1" <|> symbol "∧-elim1") >> AndElim1 <$> expr'''
-orIntro0 = (symbol "\\/-intro0" <|> symbol "∨-intro0") >> OrIntro0 <$> expr''' -- ∨
-orIntro1 = (symbol "\\/-intro1" <|> symbol "∨-intro1") >> OrIntro1 <$> expr'''
-orElim = (symbol "\\/-elim" <|> symbol "∨-elim") >> OrElim <$> expr''' <*> expr''' <*> expr'''
-botElim = symbol "⊥" >> BotElim <$> expr'''
+andIntro = (symbol "/\\-intro" <|> symbol "∧-intro") >> AndIntro <$> expr <*> expr
+andElim0 = (symbol "/\\-elim0" <|> symbol "∧-elim0") >> AndElim0 <$> expr
+andElim1 = (symbol "/\\-elim1" <|> symbol "∧-elim1") >> AndElim1 <$> expr
+orIntro0 = (symbol "\\/-intro0" <|> symbol "∨-intro0") >> OrIntro0 <$> expr -- ∨
+orIntro1 = (symbol "\\/-intro1" <|> symbol "∨-intro1") >> OrIntro1 <$> expr
+orElim = (symbol "\\/-elim" <|> symbol "∨-elim") >> OrElim <$> expr <*> expr <*> expr
+botElim = symbol "⊥-elim" >> BotElim <$> expr
 ann = do { x <- expr'; reservedOp ":"; t <- typeExpr; return $ Ann x t }
 hole = reservedOp "?" >> return (Hole 0)
 -- app = do {f <- expr'; appSym; a <- expr; return $ App f a}
-app = chainl1 expr (symbol "." >> return App)
+app = chainl1 expr (reservedOp "." >> return App)
 appSym = whiteSpace >> notFollowedBy (choice . map reservedOp $ Token.reservedOpNames hsProustDef)
 -- ann = chainr1 expr' (reservedOp ":" >> return $ Ann x t)
 var = Var <$> identifier
@@ -75,13 +75,15 @@ expr =  try andIntro
     <|> try (parens expr''')
 
 expr' :: Parsec String () Expr
-expr' = try app <|> expr <|> parens expr''
+expr' = try app <|> expr 
+-- <|> parens expr'
 
 expr'' :: Parsec String () Expr
 expr'' = try ann <|> expr'
-      <|> parens expr'''
+    --   <|> parens expr''
 
-expr''' = try lam <|> expr'' <|> parens expr'''
+expr''' = try lam <|> expr''
+--  <|> parens expr'''
 
 parseExpr = expr'''
 
