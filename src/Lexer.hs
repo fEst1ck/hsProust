@@ -8,14 +8,14 @@ hsProustDef = haskellStyle
             {
                 identStart = identStart haskellStyle <|> char '_',
                 identLetter = alphaNum <|> oneOf "_'",
-                opLetter = opLetter haskellStyle <|> oneOf "∨∧¬→⊥",
+                opLetter = opLetter haskellStyle <|> oneOf "∨∧¬→⊥λ",
                 reservedOpNames = ["\\/", "∨",
                                    "/\\", "∧",
                                    "~", "¬",
                                    "->", "→",
                                    "⊥",
                                    ":",
-                                   "\\", "=>"]
+                                   "\\", "λ", "=>"]
             }
 
 lexer = makeTokenParser hsProustDef
