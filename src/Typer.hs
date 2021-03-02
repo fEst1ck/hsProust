@@ -20,7 +20,7 @@ typeCheck ctx (AndElim1 e) w = do
 typeCheck ctx (OrIntro0 e) (Sum t _) = typeCheck ctx e t
 typeCheck ctx (OrIntro1 e) (Sum _ w) = typeCheck ctx e w
 typeCheck ctx (OrElim d f g) v = do
-    (Product t w) <- typeSynth ctx d
+    (Sum t w) <- typeSynth ctx d
     typeCheck ctx f (Arrow t v)
     typeCheck ctx g (Arrow w v)
 typeCheck ctx (BotElim e) _ = typeCheck ctx e Bot
