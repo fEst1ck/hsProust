@@ -11,7 +11,7 @@ all other operators associate to the left. Operator precedences are shown in the
 ```
 expr = λ x ⇒ expr
      | expr : t
-     | expr expr
+     | expr . expr
      | ∧-intro expr expr
      | ∧-elim0 expr expr
      | ∧-elim1 expr expr 
