@@ -39,8 +39,6 @@ t = t → t
 *Interactively proving:*
 ![prototype](demo/demo1.gif)
 
-(This is just a prototype. The repl will soon support this.)
-
 # Build & Run
 ``` bash
 $ cabal build
