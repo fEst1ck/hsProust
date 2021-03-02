@@ -57,30 +57,31 @@ botElim = symbol "⊥" >> BotElim <$> expr'''
 ann = do { x <- expr'; reservedOp ":"; t <- typeExpr; return $ Ann x t }
 hole = reservedOp "?" >> return (Hole 0)
 -- app = do {f <- expr'; appSym; a <- expr; return $ App f a}
-app = chainl1 expr (appSym >> return App)
+app = chainl1 expr (symbol "." >> return App)
 appSym = whiteSpace >> notFollowedBy (choice . map reservedOp $ Token.reservedOpNames hsProustDef)
 -- ann = chainr1 expr' (reservedOp ":" >> return $ Ann x t)
 var = Var <$> identifier
 
 expr :: Parsec String () Expr
-expr =  andIntro
-    <|> andElim0
-    <|> orIntro0
-    <|> orIntro1
-    <|> orElim
-    <|> botElim
-    <|> hole
-    <|> var
-    <|> parens expr'''
+expr =  try andIntro
+    <|> try andElim0
+    <|> try andElim1
+    <|> try orIntro0
+    <|> try orIntro1
+    <|> try orElim
+    <|> try botElim
+    <|> try hole
+    <|> try var
+    <|> try (parens expr''')
 
 expr' :: Parsec String () Expr
-expr' = app <|> expr <|> parens expr''
+expr' = try app <|> expr <|> parens expr''
 
 expr'' :: Parsec String () Expr
 expr'' = try ann <|> expr'
       <|> parens expr'''
 
-expr''' = lam <|> expr'' <|> parens expr'''
+expr''' = try lam <|> expr'' <|> parens expr'''
 
 parseExpr = expr'''
 
