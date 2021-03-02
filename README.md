@@ -34,6 +34,15 @@ t = t → t
  ```
 
 # Demo
-
-Proving the formula (A → (B → C)) → ((A ∧ B) → C): 
+*Check validity of proof terms:*
+![Type check](demo/demo2.png)
+*Interactively proving:*
 ![prototype](demo/demo1.gif)
+
+(This is just a prototype. The repl will soon support this.)
+
+# Build & Run
+``` bash
+$ cabal build
+$ cabal run
+```
