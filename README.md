@@ -40,6 +40,8 @@ t = t → t
 *Interactively proving:*
 ![prototype](demo/demo1.gif)
 
+(To be implemented in Haskell. This is a prototype in Racket.)
+
 # Build & Run
 ``` bash
 $ cabal build
