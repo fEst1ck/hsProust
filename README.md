@@ -37,6 +37,7 @@ t = t → t
 ![Type check](demo/demo2.png)
 
 *Interactively proving:*
+
 ![prototype](demo/demo1.gif)
 
 The interactive part is still work in progress. The second demo is made with Proust.
