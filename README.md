@@ -5,13 +5,12 @@ A Haskell implementation of Proust, an interactive proof assistant for [intuitio
 adopt is given in Chapter 2.
 
 # Syntax
-We do not require expressions to be fully parenthesized as in original Proust. Except for λ and → which are right associative,
-all other operators associate to the left. Operator precedences are shown in the grammar. We allow haskell style variable names.
+Operators associate to the left, except for λ and →, which are right associative.
 ## Grammar for roof terms
 ```
 expr = λ x ⇒ expr
      | expr : t
-     | expr . expr
+     | expr . expr // . is to make parsing easier
      | ∧-intro expr expr
      | ∧-elim0 expr expr
      | ∧-elim1 expr expr 
@@ -40,7 +39,7 @@ t = t → t
 *Interactively proving:*
 ![prototype](demo/demo1.gif)
 
-(To be implemented in Haskell. This is a prototype in Racket.)
+The interactive part is still work in progress. The second demo is made with Proust.
 
 # Build & Run
 ``` bash
