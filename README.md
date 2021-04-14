@@ -6,7 +6,7 @@ adopt is given in Chapter 2.
 
 # Syntax
 Operators associate to the left, except for λ and →, which are right associative.
-## Grammar for roof terms
+## Grammar for proof terms
 ```
 expr = λ x ⇒ expr
      | expr : t
